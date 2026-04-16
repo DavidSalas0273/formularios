@@ -1,0 +1,427 @@
+/* ============================================================
+   Variables
+   ============================================================ */
+:root {
+  --bg-start: #f0f4ff;
+  --bg-end:   #e8f0fe;
+  --card-bg:  #ffffff;
+  --primary:  #4f46e5;        /* indigo */
+  --primary-dark: #3730a3;
+  --primary-light: #818cf8;
+  --accent:   #06b6d4;        /* cyan */
+  --danger:   #ef4444;
+  --success:  #22c55e;
+  --text:     #1e293b;
+  --text-muted: #64748b;
+  --border:   #e2e8f0;
+  --border-focus: #4f46e5;
+  --input-bg: #f8fafc;
+  --section-bg: #f1f5f9;
+  --radius:   10px;
+  --radius-lg: 16px;
+  --shadow:   0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.05);
+  --shadow-lg: 0 20px 40px rgba(79,70,229,.12);
+}
+
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+/* ============================================================
+   Page wrapper
+   ============================================================ */
+.page-wrapper {
+  width: 100%;
+  max-width: 860px;
+}
+
+/* ============================================================
+   Card
+   ============================================================ */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+/* ============================================================
+   Card header
+   ============================================================ */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 2rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #fff;
+}
+
+.header-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.card-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-top: 0.25rem;
+}
+
+/* ============================================================
+   Alert
+   ============================================================ */
+.alert {
+  margin: 1.5rem 2rem 0;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+.alert-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: var(--danger);
+}
+
+/* ============================================================
+   Form sections
+   ============================================================ */
+form {
+  padding: 0 2rem 2rem;
+}
+
+.form-section {
+  margin-top: 1.75rem;
+  background: var(--section-bg);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.section-icon {
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   Grid layout
+   ============================================================ */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* ============================================================
+   Field groups
+   ============================================================ */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.required {
+  color: var(--danger);
+  margin-left: 2px;
+}
+
+.required-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Inputs
+   ============================================================ */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  font-family: inherit;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* ============================================================
+   File upload
+   ============================================================ */
+.file-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  background: var(--card-bg);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+input[type="file"]:hover {
+  border-color: var(--primary-light);
+}
+
+.file-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Field errors
+   ============================================================ */
+.field-error {
+  font-size: 0.8rem;
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.field-error::before {
+  content: "⚠";
+}
+
+/* ============================================================
+   Form actions
+   ============================================================ */
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius);
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   Confirm page
+   ============================================================ */
+.confirm-card {
+  text-align: center;
+  padding: 3.5rem 2.5rem;
+}
+
+.confirm-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  80%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+.confirm-card h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--success);
+  margin-bottom: 0.75rem;
+}
+
+.confirm-message {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.confirm-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--section-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  text-align: left;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.info-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.confirm-actions {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Botón volver al inicio */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.55rem 1.1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.btn-back:hover {
+  border-color: var(--primary-light);
+  color: var(--primary);
+  background: var(--bg-start);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 600px) {
+  body { padding: 1rem 0.75rem; }
+
+  .card-header { padding: 1.5rem 1.25rem; }
+  .header-icon { font-size: 2rem; }
+  .card-header h1 { font-size: 1.3rem; }
+
+  form { padding: 0 1.25rem 1.5rem; }
+  .form-section { padding: 1rem 1rem 1.25rem; }
+
+  .form-grid { grid-template-columns: 1fr; }
+  .full-width { grid-column: 1; }
+
+  .form-actions { flex-direction: column; align-items: stretch; }
+  .btn-primary { justify-content: center; }
+
+  .confirm-card { padding: 2.5rem 1.5rem; }
+}

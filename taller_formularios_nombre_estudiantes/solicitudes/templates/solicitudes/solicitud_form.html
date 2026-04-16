@@ -1,0 +1,176 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'solicitudes/styles.css' %}">
+  <title>Formulario de Solicitud</title>
+</head>
+<body>
+  <div class="page-wrapper">
+    <main class="card">
+
+      <!-- Encabezado -->
+      <div class="card-header">
+        <div class="header-icon">📋</div>
+        <div>
+          <h1>Formulario de Solicitud</h1>
+          <p class="subtitle">Complete todos los campos requeridos para registrar su solicitud.</p>
+        </div>
+      </div>
+
+      <!-- Mensajes de error globales -->
+      {% if form.non_field_errors %}
+        <div class="alert alert-error">
+          {% for error in form.non_field_errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+
+        <!-- Sección 1: Datos personales -->
+        <section class="form-section">
+          <h2 class="section-title">
+            <span class="section-icon">👤</span> Datos del solicitante
+          </h2>
+          <div class="form-grid">
+
+            <div class="field-group">
+              <label for="{{ form.nombre_solicitante.id_for_label }}">
+                {{ form.nombre_solicitante.label }}
+                <span class="required">*</span>
+              </label>
+              {{ form.nombre_solicitante }}
+              {% if form.nombre_solicitante.errors %}
+                <span class="field-error">{{ form.nombre_solicitante.errors.0 }}</span>
+              {% endif %}
+            </div>
+
+            <div class="field-group">
+              <label for="{{ form.documento_identidad.id_for_label }}">
+                {{ form.documento_identidad.label }}
+                <span class="required">*</span>
+              </label>
+              {{ form.documento_identidad }}
+              {% if form.documento_identidad.errors %}
+                <span class="field-error">{{ form.documento_identidad.errors.0 }}</span>
+              {% endif %}
+            </div>
+
+            <div class="field-group">
+              <label for="{{ form.correo_electronico.id_for_label }}">
+                {{ form.correo_electronico.label }}
+                <span class="required">*</span>
+              </label>
+              {{ form.correo_electronico }}
+              {% if form.correo_electronico.errors %}
+                <span class="field-error">{{ form.correo_electronico.errors.0 }}</span>
+              {% endif %}
+            </div>
+
+            <div class="field-group">
+              <label for="{{ form.telefono.id_for_label }}">
+                {{ form.telefono.label }}
+                <span class="required">*</span>
+              </label>
+              {{ form.telefono }}
+              {% if form.telefono.errors %}
+                <span class="field-error">{{ form.telefono.errors.0 }}</span>
+              {% endif %}
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Sección 2: Detalles de la solicitud -->
+        <section class="form-section">
+          <h2 class="section-title">
+            <span class="section-icon">📝</span> Detalles de la solicitud
+          </h2>
+          <div class="form-grid">
+
+            <div class="field-group">
+              <label for="{{ form.tipo_solicitud.id_for_label }}">
+                {{ form.tipo_solicitud.label }}
+                <span class="required">*</span>
+              </label>
+              {{ form.tipo_solicitud }}
+              {% if form.tipo_solicitud.errors %}
+                <span class="field-error">{{ form.tipo_solicitud.errors.0 }}</span>
+              {% endif %}
+            </div>
+
+            <div class="field-group">
+              <label for="{{ form.fecha_solicitud.id_for_label }}">
+                {{ form.fecha_solicitud.label }}
+                <span class="required">*</span>
+              </label>
+              {{ form.fecha_solicitud }}
+              {% if form.fecha_solicitud.errors %}
+                <span class="field-error">{{ form.fecha_solicitud.errors.0 }}</span>
+              {% endif %}
+            </div>
+
+            <div class="field-group full-width">
+              <label for="{{ form.asunto.id_for_label }}">
+                {{ form.asunto.label }}
+                <span class="required">*</span>
+              </label>
+              {{ form.asunto }}
+              {% if form.asunto.errors %}
+                <span class="field-error">{{ form.asunto.errors.0 }}</span>
+              {% endif %}
+            </div>
+
+            <div class="field-group full-width">
+              <label for="{{ form.descripcion.id_for_label }}">
+                {{ form.descripcion.label }}
+                <span class="required">*</span>
+              </label>
+              {{ form.descripcion }}
+              {% if form.descripcion.errors %}
+                <span class="field-error">{{ form.descripcion.errors.0 }}</span>
+              {% endif %}
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Sección 3: Archivo adjunto -->
+        <section class="form-section">
+          <h2 class="section-title">
+            <span class="section-icon">📎</span> Documentos adjuntos
+          </h2>
+          <div class="field-group">
+            <label for="{{ form.archivo_adjunto.id_for_label }}">
+              {{ form.archivo_adjunto.label }}
+            </label>
+            <div class="file-upload-wrapper">
+              {{ form.archivo_adjunto }}
+              <p class="file-hint">Formatos aceptados: PDF, DOC, DOCX, JPG, PNG — Máx. 10 MB</p>
+            </div>
+            {% if form.archivo_adjunto.errors %}
+              <span class="field-error">{{ form.archivo_adjunto.errors.0 }}</span>
+            {% endif %}
+          </div>
+        </section>
+
+        <!-- Acciones -->
+        <div class="form-actions">
+          <span class="required-note"><span class="required">*</span> Campos obligatorios</span>
+          <a class="btn-back" href="{% url 'home' %}">← Volver al inicio</a>
+          <button class="btn-primary" type="submit">
+            <span>Enviar solicitud</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </div>
+
+      </form>
+    </main>
+  </div>
+</body>
+</html>

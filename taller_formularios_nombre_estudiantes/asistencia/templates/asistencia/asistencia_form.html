@@ -1,0 +1,23 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'asistencia/styles.css' %}">
+  <title>Registro de Asistencia</title>
+</head>
+<body>
+  <main class="card">
+    <h1>Registro de Asistencia</h1>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="actions">
+        <button class="btn-primary" type="submit">Enviar</button>
+        <a class="btn-secondary" href="{% url 'home' %}">← Volver al inicio</a>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

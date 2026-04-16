@@ -1,0 +1,18 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'asistencia/styles.css' %}">
+  <title>Confirmación</title>
+</head>
+<body>
+  <main class="card confirm">
+    <h1>¡Registro guardado!</h1>
+    <p>Su asistencia ha sido registrada correctamente.</p>
+    <a class="btn-link" href="/asistencia/nuevo/">Registrar otra asistencia</a>
+    <a class="btn-link btn-home" href="{% url 'home' %}">← Volver al inicio</a>
+  </main>
+</body>
+</html>

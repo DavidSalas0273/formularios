@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portal de Formularios</title>
+  <style>
+    /* ── Variables ── */
+    :root {
+      --indigo:       #4f46e5;
+      --indigo-dark:  #3730a3;
+      --indigo-light: #e0e7ff;
+      --cyan:         #06b6d4;
+      --cyan-dark:    #0891b2;
+      --cyan-light:   #cffafe;
+      --text:         #1e293b;
+      --text-muted:   #64748b;
+      --border:       #e2e8f0;
+      --bg:           #f8fafc;
+      --white:        #ffffff;
+      --radius:       14px;
+      --shadow:       0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.05);
+      --shadow-lg:    0 20px 40px rgba(0,0,0,.10);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Hero / Header ── */
+    .hero {
+      background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-dark) 60%, #1e1b4b 100%);
+      color: var(--white);
+      padding: 4rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Círculos decorativos de fondo */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.08;
+      background: var(--white);
+    }
+    .hero::before { width: 400px; height: 400px; top: -120px; left: -100px; }
+    .hero::after  { width: 300px; height: 300px; bottom: -80px; right: -60px; }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      padding: 0.3rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      opacity: 0.85;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Main content ── */
+    main {
+      flex: 1;
+      padding: 3rem 1.5rem 4rem;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Cards grid ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Barra de color superior de cada card */
+    .card-bar {
+      height: 5px;
+    }
+    .card--asistencia .card-bar {
+      background: linear-gradient(90deg, var(--indigo), var(--indigo-light));
+    }
+    .card--solicitudes .card-bar {
+      background: linear-gradient(90deg, var(--cyan), var(--cyan-light));
+    }
+
+    .card-body {
+      padding: 1.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .card--asistencia .card-icon { background: var(--indigo-light); }
+    .card--solicitudes .card-icon { background: var(--cyan-light); }
+
+    .card-body h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-body p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Tags de info */
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .card--asistencia .tag { background: var(--indigo-light); color: var(--indigo-dark); }
+    .card--solicitudes .tag { background: var(--cyan-light);   color: var(--cyan-dark); }
+
+    /* Botón de cada card */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      width: 100%;
+    }
+
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn--indigo {
+      background: linear-gradient(135deg, var(--indigo), var(--indigo-dark));
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(79,70,229,.3);
+    }
+
+    .btn--cyan {
+      background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+      color: var(--white);
+      box-shadow: 0 4px 12px rgba(6,182,212,.3);
+    }
+
+    .btn-arrow { font-size: 1rem; }
+
+    /* ── Stats strip ── */
+    .stats {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      flex: 1;
+      min-width: 140px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .stat-info strong {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .stat-info span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 560px) {
+      .hero { padding: 3rem 1.25rem 4rem; }
+      main  { padding: 2rem 1rem 3rem; }
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-badge">Portal institucional</div>
+    <h1>Portal de Formularios</h1>
+    <p>Accede a los formularios disponibles para registrar asistencia o radicar una solicitud de forma rápida y sencilla.</p>
+  </header>
+
+  <!-- Cards -->
+  <main>
+    <p class="section-label">Formularios disponibles</p>
+
+    <div class="cards">
+
+      <!-- Card Asistencia -->
+      <div class="card card--asistencia">
+        <div class="card-bar"></div>
+        <div class="card-body">
+          <div class="card-icon">🗓️</div>
+          <h2>Registro de Asistencia</h2>
+          <p>
+            Registra tu asistencia indicando nombre, documento, correo,
+            fecha, hora de ingreso y salida, y observaciones adicionales.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Nombre y documento</span>
+            <span class="tag">Fecha y hora</span>
+            <span class="tag">Observaciones</span>
+          </div>
+          <a class="btn btn--indigo" href="/asistencia/nuevo/">
+            <span>Ir al formulario</span>
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card Solicitudes -->
+      <div class="card card--solicitudes">
+        <div class="card-bar"></div>
+        <div class="card-body">
+          <div class="card-icon">📋</div>
+          <h2>Formulario de Solicitud</h2>
+          <p>
+            Radica una solicitud académica, administrativa, técnica u otra.
+            Incluye descripción detallada y adjunta documentos de soporte.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Académica</span>
+            <span class="tag">Administrativa</span>
+            <span class="tag">Técnica</span>
+            <span class="tag">Archivo adjunto</span>
+          </div>
+          <a class="btn btn--cyan" href="/solicitudes/nuevo/">
+            <span>Ir al formulario</span>
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Stats strip -->
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-icon">⚡</span>
+        <div class="stat-info">
+          <strong>Rápido</strong>
+          <span>Proceso en minutos</span>
+        </div>
+      </div>
+      <div class="stat">
+        <span class="stat-icon">🔒</span>
+        <div class="stat-info">
+          <strong>Seguro</strong>
+          <span>Datos protegidos</span>
+        </div>
+      </div>
+      <div class="stat">
+        <span class="stat-icon">📱</span>
+        <div class="stat-info">
+          <strong>Responsivo</strong>
+          <span>Funciona en móvil</span>
+        </div>
+      </div>
+      <div class="stat">
+        <span class="stat-icon">✅</span>
+        <div class="stat-info">
+          <strong>Confirmación</strong>
+          <span>Recibe acuse de recibo</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Portal de Formularios &mdash; Todos los derechos reservados &copy; 2026
+  </footer>
+
+</body>
+</html>
