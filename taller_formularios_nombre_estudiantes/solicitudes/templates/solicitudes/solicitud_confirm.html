@@ -5,13 +5,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{% static 'solicitudes/styles.css' %}">
-  <title>Confirmación Solicitud</title>
+  <title>Solicitud enviada</title>
 </head>
 <body>
-  <main class="card confirm">
-    <h1>¡Solicitud enviada!</h1>
-    <p>Hemos recibido su solicitud correctamente. Revisaremos y nos pondremos en contacto.</p>
-    <a class="btn-link" href="/solicitudes/nuevo/">Enviar otra solicitud</a>
-  </main>
+  <div class="page-wrapper">
+    <main class="card confirm-card">
+
+      <div class="confirm-icon">✅</div>
+      <h1>¡Solicitud enviada con éxito!</h1>
+      <p class="confirm-message">
+        Hemos recibido su solicitud correctamente. Nuestro equipo la revisará
+        y se pondrá en contacto con usted a la brevedad posible.
+      </p>
+
+      <div class="confirm-info">
+        <div class="info-item">
+          <span class="info-icon">📧</span>
+          <span>Recibirá una notificación en el correo registrado.</span>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">⏱️</span>
+          <span>El tiempo de respuesta estimado es de 3 a 5 días hábiles.</span>
+        </div>
+      </div>
+
+      <div class="confirm-actions">
+        <a class="btn-primary" href="{% url 'solicitudes:nuevo' %}">
+          <span>Enviar otra solicitud</span>
+          <span class="btn-icon">+</span>
+        </a>
+        <a class="btn-back" href="{% url 'home' %}">← Volver al inicio</a>
+      </div>
+
+    </main>
+  </div>
 </body>
 </html>

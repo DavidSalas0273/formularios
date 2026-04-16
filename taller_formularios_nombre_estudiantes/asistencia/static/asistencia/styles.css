@@ -15,4 +15,8 @@ input[type=text], input[type=email], input[type=date], input[type=time], textare
 .actions{display:flex; gap:0.5rem; align-items:center}
 .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:var(--white); padding:0.6rem 1rem; border-radius:8px; border:none; cursor:pointer}
 .btn-link{display:inline-block; margin-top:1rem; color:var(--accent); text-decoration:none}
+.btn-home{display:inline-block; margin-top:0.75rem; color:var(--muted); text-decoration:none; font-size:0.9rem; border:1px solid rgba(255,255,255,0.12); padding:0.45rem 0.9rem; border-radius:8px; transition:background 0.2s}
+.btn-home:hover{background:rgba(255,255,255,0.06)}
+.btn-secondary{display:inline-block; color:var(--muted); text-decoration:none; font-size:0.9rem; border:1px solid rgba(255,255,255,0.12); padding:0.5rem 0.9rem; border-radius:8px; transition:background 0.2s}
+.btn-secondary:hover{background:rgba(255,255,255,0.06)}
 .confirm p{color:var(--muted)}
