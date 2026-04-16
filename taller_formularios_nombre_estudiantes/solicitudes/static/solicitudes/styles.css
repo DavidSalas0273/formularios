@@ -1,0 +1,17 @@
+:root{
+  --bg:#fff8f4; /* warm cream */
+  --card:#1b1b2f; /* dark indigo */
+  --accent:#ff8a00; /* amber */
+  --accent-2:#ff4d6d; /* strawberry */
+  --muted:#d1c7be;
+  --white:#ffffff;
+}
+body{font-family: Inter, system-ui, Arial, sans-serif; background:linear-gradient(180deg,var(--bg), #fff4ea); color:#111; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem}
+.card{background:var(--card); padding:2rem; border-radius:12px; width:100%; max-width:800px; color:var(--white); box-shadow:0 12px 30px rgba(0,0,0,0.2)}
+.card h1{color:var(--accent-2); margin-top:0}
+label{display:block; font-weight:600; margin-bottom:0.25rem}
+input[type=text], input[type=email], input[type=date], input[type=time], textarea, select, input[type=file]{width:100%; padding:0.6rem; border-radius:8px; border:none; margin-bottom:0.6rem}
+.actions{display:flex; gap:0.5rem; align-items:center}
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:var(--white); padding:0.6rem 1rem; border-radius:8px; border:none; cursor:pointer}
+.btn-link{display:inline-block; margin-top:1rem; color:var(--accent); text-decoration:none}
+.confirm p{color:var(--muted)}
