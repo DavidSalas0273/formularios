@@ -1,0 +1,17 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'solicitudes/styles.css' %}">
+  <title>Confirmación Solicitud</title>
+</head>
+<body>
+  <main class="card confirm">
+    <h1>¡Solicitud enviada!</h1>
+    <p>Hemos recibido su solicitud correctamente. Revisaremos y nos pondremos en contacto.</p>
+    <a class="btn-link" href="/solicitudes/nuevo/">Enviar otra solicitud</a>
+  </main>
+</body>
+</html>

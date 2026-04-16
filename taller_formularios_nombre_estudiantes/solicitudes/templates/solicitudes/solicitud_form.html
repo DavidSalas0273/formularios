@@ -1,0 +1,22 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'solicitudes/styles.css' %}">
+  <title>Solicitud</title>
+</head>
+<body>
+  <main class="card">
+    <h1>Formulario de Solicitud</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="actions">
+        <button class="btn-primary" type="submit">Enviar Solicitud</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
